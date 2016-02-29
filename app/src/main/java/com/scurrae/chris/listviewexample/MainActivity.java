@@ -1,13 +1,18 @@
 package com.scurrae.chris.listviewexample;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import static android.widget.AdapterView.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,14 +23,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        String[] faveTVShows = {"Dexter", "Scorpion", "Game of Thrones",
+                "Orange is the new Black", "The Walking Dead", "Breaking Bad", "Supernatural",
+        "South Park", "Family Guy", "Gotham"};
+        final ListAdapter adapt = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, faveTVShows);
+        ListView theListView = (ListView)findViewById(R.id.theListView);
+        theListView.setAdapter(adapt);
+        theListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String showPicked = "You selected " + String.valueOf(parent.getItemAtPosition(position));
+
+                Toast.makeText(MainActivity.this, showPicked, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     @Override
