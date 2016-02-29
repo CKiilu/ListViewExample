@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         String[] faveTVShows = {"Dexter", "Scorpion", "Game of Thrones",
                 "Orange is the new Black", "The Walking Dead", "Breaking Bad", "Supernatural",
         "South Park", "Family Guy", "Gotham"};
-        final ListAdapter adapt = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, faveTVShows);
+        final ListAdapter adapt = new MyAdapter(this, faveTVShows);
         ListView theListView = (ListView)findViewById(R.id.theListView);
         theListView.setAdapter(adapt);
         theListView.setOnItemClickListener(new OnItemClickListener() {
